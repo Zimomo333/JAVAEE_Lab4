@@ -1,0 +1,14 @@
+<Configure id='server' class="org.eclipse.jetty.server.Server">
+    <New id="DSTest" class="org.eclipse.jetty.plus.jndi.Resource">
+        <Arg><Ref refid="Server"/></Arg>
+        <Arg>jpa/DSTest</Arg>
+        <Arg>
+            <New class="org.h2.jdbcx.JdbcDataSource">
+                <!--<Set name="driverClass">org.some.Driver</Set>-->
+                <Set name="url">jdbc:h2:~/Lab4</Set>
+                <Set name="user">zimomo</Set>
+                <Set name="password">333</Set>
+            </New>
+        </Arg>
+    </New>
+</Configure>

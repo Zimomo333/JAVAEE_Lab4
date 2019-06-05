@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.zimomo</groupId>
+  <!-- FIXME 根据项目实际修改下面的参数 -->
+  <artifactId>zimomo</artifactId>
+  <!-- 版本号 -->
+  <version>1.0-SNAPSHOT</version>
+  <!-- 打包的文件格式，Web项目是war包，也可以是jar包。注意每种打包文件的目录结构。 -->
+  <packaging>war</packaging>
+  <!-- 项目名称 -->
+  <!-- FIXME 根据项目实际修改下面的参数 -->
+  <name>zimomo Maven Webapp</name>
+
+  <!-- 发布到Maven中央仓库的时候，必须有description -->
+  <description>Maven Demo project for the Java EE course</description>
+  <!-- 项目的Web站点，这里设为Git仓库地址 -->
+  <!-- FIXME 根据实际情况修改下面的参数 -->
+  <url>https://gitee.com/dgut-sai/JavaEE-Maven-demo</url>
+
+  <organization>
+    <name>东莞理工学院-网络空间安全学院</name>
+    <url>http://www.dgut.edu.cn</url>
+  </organization>
+
+  <!-- 如果要发布到Maven中央仓库，必须有developers，id必需与gpg的key的用户名一致，否则审核时会提示找不到公钥。 -->
+  <developers>
+    <developer>
+      <id>dgzimomo_maven</id>
+      <name>梁梓豪</name>
+      <email>120908717@qq.com</email>
+      <organization>东莞理工学院-网络空间安全学院</organization>
+    </developer>
+  </developers>
+
+  <licenses>
+    <license>
+      <name>MIT License</name>
+      <url>https://gitee.com/dgut-sai/JavaEE-Maven-demo/blob/master/LICENSE</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <!-- deploy必须，填项目的项目网址与git地址 -->
+  <scm>
+    <connection>scm:git:git@gitee.com:zimomo333/JAVAEE_Lab4.git</connection>
+    <developerConnection>scm:git:git@gitee.com:zimomo333/JAVAEE_Lab4.git</developerConnection>
+    <url>https://gitee.com/zimomo333/JAVAEE_Lab4</url>
+  </scm>
+
+  <!-- 属性变量 -->
+  <!--
+      Maven内置变量说明：
+        ${basedir} 项目根目录
+        ${project.build.directory} 构建目录，缺省为target
+        ${project.build.outputDirectory} 构建过程输出目录，缺省为target/classes
+        ${project.build.finalName} 产出物名称，缺省为${project.artifactId}-${project.version}
+        ${project.packaging} 打包类型，缺省为jar
+        ${project.xxx} 当前pom文件的任意节点的内容
+  -->
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.8</maven.compiler.source><!-- 指定源代码使用的JDK版本 -->
+    <maven.compiler.target>1.8</maven.compiler.target><!-- 指定需要生成的目标class文件的编译版本 -->
+    <maven.test.skip>true</maven.test.skip><!-- 跳过测试 -->
+  </properties>
+
+  <!-- FIXME 根据项目需要，在这里添加第三方依赖包 -->
+  <!-- Jar包的搜索可以到官网： https://mvnrepository.com -->
+  <dependencies>
+
+    <dependency>
+      <!-- 符合 Java EE 8 规范的服务器将拥有自己的新 Java EE 8 API 实现 -->
+      <groupId>javax</groupId>
+      <artifactId>javaee-api</artifactId>
+      <version>8.0</version>
+      <!-- scope为provided的话，依赖只参与编译，但不参与打包。因为符合Java EE的规范的容器都是包含JavaEE API的实现的，所以不需要打包这个依赖进war包。 -->
+      <!--<scope>provided</scope>-->
+     </dependency>
+
+    <!-- H2数据库 -->
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+      <version>1.4.199</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <!-- JPA -->
+    <!-- https://mvnrepository.com/artifact/org.eclipse.persistence/eclipselink -->
+    <dependency>
+      <groupId>org.eclipse.persistence</groupId>
+      <artifactId>eclipselink</artifactId>
+      <version>2.7.4</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.eclipse</groupId>
+      <artifactId>yasson</artifactId>
+      <version>1.0.3</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.glassfish</groupId>
+      <artifactId>javax.json</artifactId>
+      <version>1.1.4</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpclient</artifactId>
+      <version>4.5.7</version>
+    </dependency>
+
+     <dependency>
+       <groupId>junit</groupId>
+       <artifactId>junit</artifactId>
+       <version>4.11</version>
+       <scope>test</scope>
+     </dependency>
+   </dependencies>
+
+   <repositories>
+     <!-- FIXME 根据需要添加其它的仓库，这里定义的仓库的优先级高于Maven的中央仓库 -->
+    <!--阿里云Maven镜像仓库-->
+    <repository>
+      <id>AliYun-public</id>
+      <name>public</name>
+      <url>https://maven.aliyun.com/repository/public</url>
+    </repository>
+    <!-- Spring框架的阿里云镜像仓库 -->
+    <repository>
+      <id>spring</id>
+      <url>https://maven.aliyun.com/repository/spring</url>
+      <releases>
+      </releases>
+      <snapshots>
+      </snapshots>
+    </repository>
+    <!-- Sai的私有仓库 -->
+    <repository>
+      <id>rdc-releases</id>
+      <name>Sai</name>
+      <url>https://repo.rdc.aliyun.com/repository/30100-release-wgEVZH</url>
+    </repository>
+
+  </repositories>
+
+  <!-- 这里设置项目所依赖的插件的仓库,当需要下载plugin时，优先检索下面设置的仓库 -->
+  <pluginRepositories>
+    <!-- FIXME 根据需要添加其它的仓库，这里定义的仓库的优先级高于Maven的中央仓库 -->
+    <pluginRepository>
+      <id>AliYun-public</id>
+      <name>public</name>
+      <url>https://maven.aliyun.com/repository/public</url>
+    </pluginRepository>
+    <pluginRepository>
+      <id>spring</id>
+      <url>https://maven.aliyun.com/repository/spring</url>
+      <releases>
+      </releases>
+      <snapshots>
+      </snapshots>
+    </pluginRepository>
+    <!-- tomcat8插件需要在下面的仓库里下载，不配置的话idea下载不了 -->
+    <pluginRepository>
+      <id>alfresco</id>
+      <url>https://artifacts.alfresco.com/nexus/content/repositories/public/</url>
+    </pluginRepository>
+
+  </pluginRepositories>
+
+  <build>
+    <!-- 打包时的文件名字 -->
+    <finalName>${project.artifactId}</finalName>
+
+    <plugins>
+      <!-- 配置Tomcat8插件 -->
+      <!--
+        使用本插件可以在项目目录下直接运行下面的命令运行项目
+          mvn tomcat8:run-war
+        其它维护命令：
+          tomcat8:reload    #重新加载web war包
+          tomcat8:start     #启动tomcat
+          tomcat8:stop      #停止tomcat
+          tomcat8:undeploy  #停止一个war包
+      -->
+      <plugin>
+        <groupId>org.apache.tomcat.maven</groupId>
+        <artifactId>tomcat8-maven-plugin</artifactId>
+        <version>3.0-r1756463</version>
+        <configuration>
+          <!-- 这里配置端口号和访问路径 -->
+          <path>/login</path>
+          <port>8080</port>
+          <!-- 设置URL按UTF-8进行编码，这样就解决了中文参数乱码。 -->
+          <uriEncoding>UTF-8</uriEncoding>
+          <!-- 下面配置进行热部署时的地址、用户与密码 -->
+          <!-- 在第一次部署时的命令为：
+                mvn tomcat8:deploy
+               以后进行重新热部署时命令改为
+                mvn tomcat8:redeploy 即可 -->
+          <!-- FIXME 根据实际情况修改下面的参数 -->
+          <!-- /manager/text不能是/manager/html,否则报403错误 -->
+          <url>http://localhost:8080/manager/text</url>
+          <username>tomcat</username>
+          <password>tomcat</password>
+        </configuration>
+      </plugin>
+
+      <!-- 配置jetty插件 -->
+      <!--
+          使用本插件可以在项目目录下直接运行下面的命令运行项目
+          mvn jetty:run   此命令可以直接运行项目，不将其打包成war文件。如果你修改了java类文件的源代码，重新编译后，插件会自动重新部署。
+          mvn jetty:run-war   此命令是会先将程序打包成war文件然后再将其部署。如果有代码修改，会重新打包war文件并部署。
+          mvn jetty:stop  关闭jetty容器
+      -->
+      <!-- jetty插件文档： https://www.eclipse.org/jetty/documentation/current/jetty-maven-plugin.html -->
+      <plugin>
+        <groupId>org.eclipse.jetty</groupId>
+        <artifactId>jetty-maven-plugin</artifactId>
+        <version>9.4.14.v20181114</version>
+        <configuration>
+          <!-- 配置自动热部署的扫描时间间隔，单位：秒 -->
+          <scanIntervalSeconds>120</scanIntervalSeconds>
+          <webApp>
+            <!-- FIXME 配置Web应用的访问路径Path,例：http://localhost:8080/test -->
+            <contextPath>/login</contextPath>
+          </webApp>
+          <jettyXml>jetty.xml</jettyXml>
+          <httpConnector>
+            <!-- FIXME 配置jetty容器端口 -->
+            <port>8080</port>
+          </httpConnector>
+          <!-- mvn jetty:stop 可以关闭当前运行的jetty容器，但需要设置下面三个参数 -->
+          <stopPort>9999</stopPort>
+          <stopKey>sai</stopKey>
+          <stopWait>10</stopWait>
+        </configuration>
+        <dependencies>
+          <!-- H2数据库 -->
+          <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.4.199</version>
+          </dependency>
+
+          <!-- JPA -->
+          <!-- https://mvnrepository.com/artifact/org.eclipse.persistence/javax.persistence -->
+          <dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>javax.persistence</artifactId>
+            <version>2.2.1</version>
+          </dependency>
+          <!-- https://mvnrepository.com/artifact/org.eclipse.persistence/eclipselink -->
+          <dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>eclipselink</artifactId>
+            <version>2.7.4</version>
+          </dependency>
+
+        </dependencies>
+      </plugin>
+    </plugins>
+
+    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+      <plugins>
+        <plugin>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>3.1.0</version>
+        </plugin>
+        <!-- see http://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_war_packaging -->
+        <plugin>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>3.0.2</version>
+        </plugin>
+        <!-- maven-compiler-plugin配置参数说明：http://maven.apache.org/plugins/maven-compiler-plugin/compile-mojo.html -->
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.8.0</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>2.22.1</version>
+        </plugin>
+        <!-- http://maven.apache.org/plugins/maven-war-plugin/ -->
+        <plugin>
+          <artifactId>maven-war-plugin</artifactId>
+          <version>3.2.2</version>
+          <!--
+             Java EE 6以后的版本，Java EE规范的web应用里的web.xml不是必须的，因为通过注解即可配置web应用。
+             但maven-war-plugin插件在打包时，如果项目里没有web.xml文件，会报错。
+             解决方法：在maven-war-plugin里加下面的<failOnMissingWebXml>false</failOnMissingWebXml>配置项。
+          -->
+          <configuration>
+            <failOnMissingWebXml>false</failOnMissingWebXml>
+          </configuration>
+        </plugin>
+        <plugin>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>2.5.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>2.8.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-archetype-plugin</artifactId>
+          <version>3.0.1</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+
+  <!-- 设置Deploy发布的远程Maven仓库，注意，用户与密码设置在settings.xml-->
+  <distributionManagement>
+    <!--<repository>-->
+      <!--<id>rdc-releases</id>-->
+      <!--<url>https://repo.rdc.aliyun.com/repository/30100-release-wgEVZH/</url>-->
+    <!--</repository>-->
+    <!--<snapshotRepository>-->
+      <!--<id>rdc-snapshots</id>-->
+      <!--<url>https://repo.rdc.aliyun.com/repository/30100-snapshot-rGrOkv/</url>-->
+    <!--</snapshotRepository>-->
+  </distributionManagement>
+
+  <!-- 发布到Maver中央仓库时用的profiles -->
+  <!-- 发布命令： mvn clean deploy -P release -->
+  <!-- Maven仓库的用户与密码在settings.xml，用户名dgsai_maven -->
+  <profiles>
+    <profile>
+      <id>release</id>
+      <build>
+        <plugins>
+          <!-- Source -->
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-source-plugin</artifactId>
+            <version>3.0.1</version>
+            <executions>
+              <execution>
+                <phase>package</phase>
+                <goals>
+                  <goal>jar-no-fork</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <!-- Javadoc -->
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <version>3.0.1</version>
+            <executions>
+              <execution>
+                <phase>package</phase>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <!-- GPG -->
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <version>1.6</version>
+            <executions>
+              <execution>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+                <configuration>
+                  <!-- This is necessary for gpg to not try to use the pinentry programs -->
+                  <!-- 使gpg插件加密时无需弹出对话框询问密钥库密码，密码设置在settings.xml里 -->
+                  <gpgArguments>
+                    <arg>--pinentry-mode</arg>
+                    <arg>loopback</arg>
+                  </gpgArguments>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+          <!-- 发布OSSRH -->
+          <plugin>
+            <groupId>org.sonatype.plugins</groupId>
+            <artifactId>nexus-staging-maven-plugin</artifactId>
+            <version>1.6.7</version>
+            <extensions>true</extensions>
+            <configuration>
+              <serverId>oss_maven</serverId>
+              <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+              <autoReleaseAfterClose>true</autoReleaseAfterClose>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+      <distributionManagement>
+        <snapshotRepository>
+          <id>oss_maven</id>
+          <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+        </snapshotRepository>
+        <repository>
+          <id>oss_maven</id>
+          <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+      </distributionManagement>
+    </profile>
+  </profiles>
+
+</project>

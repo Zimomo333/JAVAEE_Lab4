@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>用户登录</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="css/style_login.css" rel="stylesheet" type="text/css" media="all"/>
+	<link type="text/css" rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+	<script type="text/javascript" src="jQuery/jquery.min.js"></script>
+	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="login">
+	<div class="login-top">
+		<h1>用户登录</h1>
+		<form action="login_action.jsp" method="post">
+			<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+			用户名:<input type="text" value="Username" name="username" onfocus="this.value = '';" >
+			<span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
+			密码:　<input type="password" value="Password" name="password1" onfocus="this.value = '';" >
+	    	<div class="login-button">
+				<input value="  莞工登录" onclick="window.location.href='https://cas.dgut.edu.cn?appid=javaee&state=STATE'">
+	    		<a>|</a>
+	    		<input type="submit" value="本地登录" >
+	    	</div>
+		</form>
+	</div>
+	<div class="login-bottom">
+		<h3>新用户，<a href="register.jsp">立即注册</a> </h3>
+	</div>
+</div>	
+
+
+</body>
+</html>
